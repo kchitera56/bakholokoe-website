@@ -8,7 +8,7 @@ import json
 import os
 
 # ---------------------------------------
-# LOAD .ENV ENVIRONMENT VARIABLES
+# LOAD ENVIRONMENT VARIABLES
 # ---------------------------------------
 load_dotenv()
 
@@ -33,19 +33,19 @@ def send_email(subject, recipient, body):
     mail.send(msg)
 
 # ---------------------------------------
-# FIREBASE INITIALIZATION (RENDER SAFE)
+# FIREBASE INITIALIZATION FOR RENDER
 # ---------------------------------------
 if not firebase_admin._apps:
 
-    firebase_credentials_raw = os.getenv("FIREBASE_CREDENTIALS")
+    firebase_credentials_raw = os.getenv("FIREBASE_KEY_JSON")
 
     if not firebase_credentials_raw:
-        raise RuntimeError("❌ Missing FIREBASE_CREDENTIALS environment variable in Render!")
+        raise RuntimeError("❌ Missing FIREBASE_KEY_JSON in Render environment settings!")
 
     try:
         firebase_credentials = json.loads(firebase_credentials_raw)
     except json.JSONDecodeError:
-        raise RuntimeError("❌ FIREBASE_CREDENTIALS contains invalid JSON. Fix in Render dashboard.")
+        raise RuntimeError("❌ FIREBASE_KEY_JSON contains invalid JSON. Fix it in Render.")
 
     cred = credentials.Certificate(firebase_credentials)
 
@@ -141,14 +141,14 @@ def contact():
 
         save_contact_message(user_name, email, phone, message)
 
-        # Send admin notification
+        # Admin email
         send_email(
             "New Contact Message",
             os.getenv("MAIL_USERNAME"),
             f"Name: {user_name}\nEmail: {email}\nPhone: {phone}\nMessage:\n{message}"
         )
 
-        # Send auto reply
+        # Auto reply
         send_email(
             "We received your message",
             email,
@@ -162,7 +162,7 @@ def contact():
     return render_template("contact.html", messages=messages)
 
 # ---------------------------------------
-# REVIEWS
+# REVIEWS PAGE
 # ---------------------------------------
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews_page():
@@ -172,7 +172,7 @@ def reviews_page():
 
         email = session["user"]
 
-        # Only one review per user
+        # One review per user
         if any(r["user"] == email for r in get_all_reviews()):
             flash("You have already submitted a review.", "error")
             return redirect(url_for("reviews_page"))
@@ -183,7 +183,6 @@ def reviews_page():
 
         save_review(email, name, review, rating)
 
-        # Notify admin
         send_email(
             "New Review Submitted",
             os.getenv("MAIL_USERNAME"),
@@ -196,7 +195,7 @@ def reviews_page():
     return render_template("reviews.html")
 
 # ---------------------------------------
-# AUTHENTICATION
+# SIGNUP
 # ---------------------------------------
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -215,6 +214,9 @@ def signup():
 
     return render_template("signup.html")
 
+# ---------------------------------------
+# LOGIN
+# ---------------------------------------
 @app.route("/login", methods=["GET", "POST"])
 def login():
     next_page = request.args.get("next")
@@ -231,7 +233,10 @@ def login():
 
         session["user"] = email
         flash("Login successful!", "success")
-        return redirect(url_for(next_page or "index"))
+
+        if next_page:
+            return redirect(url_for(next_page))
+        return redirect(url_for("index"))
 
     return render_template("login.html")
 
