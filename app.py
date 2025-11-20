@@ -7,17 +7,17 @@ from dotenv import load_dotenv
 import json
 import os
 
-# ------------------------------
-# LOAD ENVIRONMENT VARIABLES
-# ------------------------------
+# ---------------------------------------
+# LOAD .ENV ENVIRONMENT VARIABLES
+# ---------------------------------------
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
-# ------------------------------
-# EMAIL CONFIG
-# ------------------------------
+# ---------------------------------------
+# EMAIL CONFIGURATION
+# ---------------------------------------
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
@@ -32,19 +32,20 @@ def send_email(subject, recipient, body):
     msg.body = body
     mail.send(msg)
 
-# ------------------------------
-# FIREBASE INITIALIZATION
-# ------------------------------
+# ---------------------------------------
+# FIREBASE INITIALIZATION (RENDER SAFE)
+# ---------------------------------------
 if not firebase_admin._apps:
+
     firebase_credentials_raw = os.getenv("FIREBASE_CREDENTIALS")
 
     if not firebase_credentials_raw:
-        raise RuntimeError("❌ FIREBASE_CREDENTIALS environment variable missing!")
+        raise RuntimeError("❌ Missing FIREBASE_CREDENTIALS environment variable in Render!")
 
     try:
         firebase_credentials = json.loads(firebase_credentials_raw)
     except json.JSONDecodeError:
-        raise RuntimeError("❌ Invalid FIREBASE_CREDENTIALS JSON format")
+        raise RuntimeError("❌ FIREBASE_CREDENTIALS contains invalid JSON. Fix in Render dashboard.")
 
     cred = credentials.Certificate(firebase_credentials)
 
@@ -52,9 +53,9 @@ if not firebase_admin._apps:
         "databaseURL": os.getenv("DATABASE_URL")
     })
 
-# ------------------------------
+# ---------------------------------------
 # HELPER FUNCTIONS
-# ------------------------------
+# ---------------------------------------
 def format_email_key(email):
     return email.replace('.', '_')
 
@@ -97,9 +98,9 @@ def get_all_contact_messages():
     messages = db.reference("contact_messages").get() or {}
     return sorted(messages.values(), key=lambda x: x.get("timestamp", ""), reverse=True)
 
-# ------------------------------
+# ---------------------------------------
 # PUBLIC ROUTES
-# ------------------------------
+# ---------------------------------------
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -120,9 +121,9 @@ def map_page():
 def kids():
     return render_template("kids.html")
 
-# ------------------------------
-# CONTACT FORM
-# ------------------------------
+# ---------------------------------------
+# CONTACT PAGE
+# ---------------------------------------
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -137,14 +138,17 @@ def contact():
             phone = request.form.get("phone")
 
         message = request.form.get("message")
+
         save_contact_message(user_name, email, phone, message)
 
+        # Send admin notification
         send_email(
             "New Contact Message",
             os.getenv("MAIL_USERNAME"),
             f"Name: {user_name}\nEmail: {email}\nPhone: {phone}\nMessage:\n{message}"
         )
 
+        # Send auto reply
         send_email(
             "We received your message",
             email,
@@ -157,9 +161,9 @@ def contact():
     messages = get_all_contact_messages()
     return render_template("contact.html", messages=messages)
 
-# ------------------------------
+# ---------------------------------------
 # REVIEWS
-# ------------------------------
+# ---------------------------------------
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews_page():
     if request.method == "POST":
@@ -168,7 +172,7 @@ def reviews_page():
 
         email = session["user"]
 
-        # Only allow 1 review per user
+        # Only one review per user
         if any(r["user"] == email for r in get_all_reviews()):
             flash("You have already submitted a review.", "error")
             return redirect(url_for("reviews_page"))
@@ -179,6 +183,7 @@ def reviews_page():
 
         save_review(email, name, review, rating)
 
+        # Notify admin
         send_email(
             "New Review Submitted",
             os.getenv("MAIL_USERNAME"),
@@ -190,9 +195,9 @@ def reviews_page():
 
     return render_template("reviews.html")
 
-# ------------------------------
+# ---------------------------------------
 # AUTHENTICATION
-# ------------------------------
+# ---------------------------------------
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
@@ -236,9 +241,9 @@ def logout():
     flash("Logged out successfully", "success")
     return redirect(url_for("index"))
 
-# ------------------------------
+# ---------------------------------------
 # HUNT BOOKING
-# ------------------------------
+# ---------------------------------------
 @app.route("/book-hunt", methods=["GET", "POST"])
 def book_hunt():
     if "user" not in session:
@@ -266,9 +271,9 @@ def book_hunt():
 
     return render_template("book_hunt.html", success=success)
 
-# ------------------------------
+# ---------------------------------------
 # ACCOMMODATION BOOKING
-# ------------------------------
+# ---------------------------------------
 @app.route("/accommodation", methods=["GET", "POST"])
 def accommodation():
     if "user" not in session:
@@ -296,9 +301,9 @@ def accommodation():
 
     return render_template("accommodation.html", success=success)
 
-# ------------------------------
+# ---------------------------------------
 # PURIFIED WATER
-# ------------------------------
+# ---------------------------------------
 @app.route("/purified-water", methods=["GET", "POST"])
 def water():
     if "user" not in session:
@@ -327,8 +332,8 @@ def water():
 
     return render_template("water.html", success=success)
 
-# ------------------------------
+# ---------------------------------------
 # RUN SERVER
-# ------------------------------
+# ---------------------------------------
 if __name__ == "__main__":
     app.run(debug=True)
