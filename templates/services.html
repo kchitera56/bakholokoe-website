@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Services — Bakholokoe Game Reserve{% endblock %}
+{% block content %}
+<h2>Our Services</h2>
+<div class="cards">
+  {% for s in services %}
+    <div class="card">
+      <h3>{{ s.title }}</h3>
+      <p>{{ s.desc }}</p>
+      <button onclick="bookService('{{ s.title }}')">Book / Enquire</button>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+function bookService(name) {
+  alert('Redirecting to enquiry for: ' + name);
+  location.href = "{{ url_for('contact') }}";
+}
+</script>
+{% endblock %}

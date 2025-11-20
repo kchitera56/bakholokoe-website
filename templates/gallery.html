@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="section-title">Image Gallery</h2>
+
+<div class="gallery">
+    <img src="{{ url_for('static', filename='img/g1.jpg') }}">
+    <img src="{{ url_for('static', filename='img/g2.jpg') }}">
+    <img src="{{ url_for('static', filename='img/g3.jpg') }}">
+    <img src="{{ url_for('static', filename='img/g4.jpg') }}">
+</div>
+
+{% endblock %}

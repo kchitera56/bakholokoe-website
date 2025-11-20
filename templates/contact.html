@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Contact Us</h2>
+
+{% if not session.get('user') %}
+<form method="post" action="{{ url_for('contact') }}" class="auth-form">
+    <label>First Name</label>
+    <input name="first_name" required>
+
+    <label>Email Address</label>
+    <input name="email" type="email" required>
+
+    <label>Contact Number</label>
+    <input name="phone" type="tel" required>
+
+    <label>Message</label>
+    <textarea name="message" required></textarea>
+
+    <button type="submit">Send Message</button>
+</form>
+
+<p>Already signed up? <a href="{{ url_for('login') }}">Sign in</a></p>
+
+{% else %}
+<form method="post" action="{{ url_for('contact') }}">
+    <label>Message</label>
+    <textarea name="message" required></textarea>
+    <button type="submit">Send Message</button>
+</form>
+{% endif %}
+
+{% endblock %}

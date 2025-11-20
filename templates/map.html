@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="section-title">Find Us</h2>
+
+<!-- ===== GOOGLE MAP MULTIPLE PINS ===== -->
+<div class="map-container">
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3435.051351918739!2d29.13324!3d-28.27357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1eabd8c04a1b9f01%3A0x91b57232ece2b204!2sHarrismith%20Botanical%20Garden!5e0!3m2!1sen!2sza!4v1700000000000"
+        width="100%"
+        height="500"
+        style="border:0; border-radius:10px;"
+        allowfullscreen=""
+        loading="lazy">
+    </iframe>
+</div>
+
+
+<!-- ===== ROUTE PLANNER ===== -->
+<section class="directions">
+    <h2>Get Directions</h2>
+    <p>Enter your starting location to get a route to Bakholokoe Game Reserve.</p>
+
+    <form action="https://www.google.com/maps/dir/" method="get" target="_blank" class="route-form">
+        <input type="text" name="api=1&origin" placeholder="Enter your location (e.g. Johannesburg, Durban)" required>
+        <input type="hidden" name="destination" value="Harrismith Botanical Garden">
+        <button type="submit" class="btn">Get Directions</button>
+    </form>
+</section>
+
+
+<!-- ===== MULTIPLE PINS LIST (Clickable Locations) ===== -->
+<section class="points">
+    <h2>Explore Our Locations</h2>
+    <ul class="pin-list">
+        <li><a target="_blank" href="https://www.google.com/maps?q=Harrismith+Botanical+Garden">📍 Main Reserve Entrance</a></li>
+        <li><a target="_blank" href="https://www.google.com/maps?q=Pine+Forest+Harrismith">🌲 Pine Forest Walk</a></li>
+        <li><a target="_blank" href="https://www.google.com/maps?q=Sterkfontein+Dam+Reserve">🎣 Fishing / Dam Area</a></li>
+        <li><a target="_blank" href="https://www.google.com/maps?q=Glen+Garriff+Nature+Reserve">🦌 Wildlife Viewing Spot</a></li>
+        <li><a target="_blank" href="https://www.google.com/maps?q=Harrismith+Picnic+Area">🍃 Picnic Park</a></li>
+        <li><a target="_blank" href="https://www.google.com/maps?q=Harrismith+Camping+Grounds">⛺ Camping Grounds</a></li>
+        <li><a target="_blank" href="https://www.google.com/maps?q=Harrismith+Natural+Spring">💧 Spring Water Source</a></li>
+    </ul>
+</section>
+
+{% endblock %}

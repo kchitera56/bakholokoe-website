@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ABOUT HERO -->
+<section class="about-hero">
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-text">
+        <h1>About Bakholokoe Game Reserve</h1>
+        <p>Where nature, culture, and wildlife come alive at the Harrismith Botanic Gardens.</p>
+    </div>
+</section>
+
+<!-- ABOUT CONTENT -->
+<section class="about-section">
+
+    <!-- 2 COLUMN INFO -->
+    <div class="about-grid">
+        <div class="about-text">
+            <h2><i class="fas fa-paw"></i> Wildlife & Biodiversity</h2>
+            <p>
+                Bakholokoe Game Reserve is home to spectacular wildlife roaming freely across
+                the rich grasslands of the Harrismith Botanic Gardens. Visitors can encounter:
+            </p>
+            <ul>
+                <li>✔ Antelope: Eland, Springbok, Blesbok, Impala</li>
+                <li>✔ Diverse Birdlife: Raptors, forest birds, wetland species</li>
+                <li>✔ Small mammals, reptiles, and rare plant species</li>
+            </ul>
+        </div>
+
+        <div class="about-image">
+            <img src="{{ url_for('static', filename='img/wildlife.jpg') }}" alt="Wildlife">
+        </div>
+    </div>
+
+    <!-- FEATURE IMAGE -->
+    <div class="feature-image">
+        <img src="{{ url_for('static', filename='img/scenery.jpg') }}" alt="Nature Trails">
+    </div>
+
+    <!-- NATURE TRAILS -->
+    <div class="about-grid reverse">
+        <div class="about-image">
+            <img src="{{ url_for('static', filename='img/trail.jpg') }}" alt="Nature Trails">
+        </div>
+
+        <div class="about-text">
+            <h2><i class="fas fa-tree"></i> Scenic Nature Trails</h2>
+            <p>
+                Surrounded by pine forests, rocky plateaus, waterfalls, and viewpoints,
+                Bakholokoe Game Reserve offers unforgettable hiking and photography experiences.
+                Trails range from easy walks to moderate mountain adventures.
+            </p>
+        </div>
+    </div>
+
+    <!-- HERITAGE SECTION -->
+    <div class="visitor-box">
+        <h2><i class="fas fa-users"></i> Cultural Heritage of the Bakholokoe People</h2>
+        <p>
+            The reserve honours the heritage of one of Harrismith's earliest communities,
+            the Bakholokoe people. Visitors can explore:
+        </p>
+        <ul>
+            <li>✔ Traditional storytelling and ancestral sites</li>
+            <li>✔ Lineage and origins of the Bakholokoe people</li>
+            <li>✔ Their historic relationship with the land and wildlife</li>
+        </ul>
+    </div>
+
+    <!-- EXPERIENCES -->
+    <section class="cards">
+        <a class="card">
+            <img src="{{ url_for('static', filename='img/wildlife2.jpg') }}">
+            Wildlife Viewing
+        </a>
+        <a class="card">
+            <img src="{{ url_for('static', filename='img/pineforest.jpg') }}">
+            Pine Forest Walks
+        </a>
+        <a class="card">
+            <img src="{{ url_for('static', filename='img/culture.jpg') }}">
+            Cultural Tours
+        </a>
+        <a class="card">
+            <img src="{{ url_for('static', filename='img/birdwatching.jpg') }}">
+            Birdwatching
+        </a>
+    </section>
+
+</section>
+
+{% endblock %}

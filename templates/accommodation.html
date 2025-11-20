@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="page-header">
+    <h1>Accommodation</h1>
+    <p>Eco-friendly cottages, luxury suites, and peaceful campsites.</p>
+</section>
+
+<section class="service-section visitor-box">
+    <img src="{{ url_for('static', filename='img/accommodation.jpg') }}" class="feature-image">
+
+    <h2>Available Stays</h2>
+    <ul>
+        <li>Mountain View Cottages</li>
+        <li>Forest Campsites</li>
+        <li>Lodge Suites</li>
+        <li>Group Cabins</li>
+    </ul>
+
+    {% if 'user' in session %}
+        {% if success %}
+            <p class="success-message" style="text-align:center; padding:20px; font-size:18px; color:green;">
+                Successfully booked your stay! Hope to see you soon.
+            </p>
+        {% else %}
+        <h2>Book Your Stay</h2>
+        <form method="post" action="{{ url_for('accommodation') }}" class="booking-form">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" required>
+
+            <label for="contact">Contact Number</label>
+            <input type="text" id="contact" name="contact" required>
+
+            <label for="checkin_date">Preferred Check-in Date</label>
+            <input type="date" id="checkin_date" name="checkin_date" required>
+
+            <button type="submit" class="btn">Submit Booking</button>
+        </form>
+        {% endif %}
+    {% else %}
+    <p style="text-align:center; padding:20px;">
+        Please <a href="{{ url_for('login') }}">login</a> to book your stay.
+    </p>
+    {% endif %}
+</section>
+
+{% endblock %}

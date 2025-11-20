@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="page-header">
+    <h1>Purified Spring Water</h1>
+    <p>Harvested naturally from Bakholokoe mountain springs.</p>
+</section>
+
+<section class="service-section visitor-box">
+    <img src="{{ url_for('static', filename='img/water.jpg') }}" class="feature-image">
+
+    <h2>Available Products</h2>
+    <ul>
+        <li>500ml bottled water</li>
+        <li>1L bottled water</li>
+        <li>5L & 20L containers</li>
+        <li>Bulk water supply</li>
+    </ul>
+
+    {% if 'user' in session %}
+        {% if success %}
+            <p class="success-message" style="text-align:center; padding:20px; font-size:18px; color:green;">
+                Successfully placed your water order! Hope to see you soon.
+            </p>
+        {% else %}
+        <h2>Order Water</h2>
+        <form method="post" action="{{ url_for('water') }}" class="booking-form">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" required>
+
+            <label for="contact">Contact Number</label>
+            <input type="text" id="contact" name="contact" required>
+
+            <label for="product_quantity">Quantity / Preferred Delivery Date</label>
+            <input type="text" id="product_quantity" name="product_quantity" placeholder="e.g., 10x1L bottles or 20L container" required>
+
+            <label for="location">Delivery Location</label>
+            <input type="text" id="location" name="location" placeholder="Enter delivery address" required>
+
+            <button type="submit" class="btn">Submit Order</button>
+        </form>
+        {% endif %}
+    {% else %}
+    <p style="text-align:center; padding:20px;">
+        Please <a href="{{ url_for('login') }}">login</a> to place an order.
+    </p>
+    {% endif %}
+</section>
+
+{% endblock %}

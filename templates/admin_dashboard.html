@@ -1,0 +1,35 @@
+<!-- templates/admin_dashboard.html -->
+{% extends "base.html" %}
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+<h2>Contact Messages</h2>
+{% for m in messages %}
+  <div class="visitor-box">
+    <strong>{{ m.name }}</strong> — {{ m.email }} — {{ m.timestamp }}<br>
+    {{ m.message }}
+  </div>
+{% else %}
+  <p>No messages yet.</p>
+{% endfor %}
+
+<h2>Bookings</h2>
+{% for b in bookings %}
+  <div class="visitor-box">
+    <strong>{{ b.category | default("booking") }}</strong> — {{ b.user }} — {{ b.timestamp }}<br>
+    {{ b }}
+  </div>
+{% else %}
+  <p>No bookings yet.</p>
+{% endfor %}
+
+<h2>Reviews</h2>
+{% for r in reviews %}
+  <div class="visitor-box">
+    <strong>{{ r.name }}</strong> — {{ r.rating }} — {{ r.timestamp }}<br>
+    {{ r.review }}
+  </div>
+{% else %}
+  <p>No reviews yet.</p>
+{% endfor %}
+{% endblock %}

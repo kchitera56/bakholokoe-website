@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Section With Parallax -->
+<section class="hero-banner fade-in">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-text">
+        <h1>Welcome to Bakholokoe Game Reserve</h1>
+        <p>Experience nature, peace, and adventure.</p>
+        <a href="{{ url_for('about') }}" class="btn-hero">Explore More</a>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+    <h2 class="section-title fade-in">Our Services</h2>
+
+    <div class="cards">
+
+        <a href="{{ url_for('login', next='book-hunt') }}" class="card service-card slide-up">
+            <img src="{{ url_for('static', filename='img/hunting.jpg') }}" alt="Book Hunt">
+            <h3>Book Hunt</h3>
+            <p>Reserve safe and guided hunting experiences.</p>
+        </a>
+
+        <a href="{{ url_for('login', next='purified-water') }}" class="card service-card slide-up">
+            <img src="{{ url_for('static', filename='img/water.jpg') }}" alt="Purified Water">
+            <h3>Purified Water</h3>
+            <p>Buy natural spring purified water from the reserve.</p>
+        </a>
+
+        <a href="{{ url_for('login', next='accommodation') }}" class="card service-card slide-up">
+            <img src="{{ url_for('static', filename='img/accommodation.jpg') }}" alt="Accommodation">
+            <h3>Accommodation</h3>
+            <p>Stay in our peaceful lodges and campsites.</p>
+        </a>
+
+    </div>
+</section>
+
+<!-- Feature Image -->
+<section class="feature-image zoom-in">
+    <img src="{{ url_for('static', filename='img/background.jpg') }}" alt="Bakholokoe Game Reserve">
+</section>
+
+<!-- Game Reserve Experiences -->
+<section class="experiences" id="experiences">
+    <h2 class="section-title fade-in">Game Reserve Experiences</h2>
+
+    <div class="card-grid">
+
+        <div class="card slide-up">
+            <img src="{{ url_for('static', filename='img/wildlife.jpg') }}" alt="Wildlife Viewing">
+            <h3>Wildlife Viewing</h3>
+            <p>Bush animals, birdlife, and ecological biodiversity.</p>
+        </div>
+
+        <div class="card slide-up">
+            <img src="{{ url_for('static', filename='img/nature_walk.jpg') }}" alt="Nature Walks">
+            <h3>Nature Trails & Guided Walks</h3>
+            <p>Scenic routes with expert guides.</p>
+        </div>
+
+        <div class="card slide-up">
+            <img src="{{ url_for('static', filename='img/pine_forest.jpg') }}" alt="Pine Forest">
+            <h3>Scenic Pine Forest</h3>
+            <p>Photography and peaceful exploration.</p>
+        </div>
+
+        <div class="card slide-up">
+            <img src="{{ url_for('static', filename='img/cultural_tour.jpg') }}" alt="Cultural Tours">
+            <h3>Cultural Heritage Tours</h3>
+            <p>Learn the history of the Bakholokoe people.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Outdoor Adventure Activities -->
+<section class="adventure" id="adventure">
+    <h2 class="section-title fade-in">Outdoor Adventure Activities</h2>
+
+    <div class="card-grid">
+
+        <div class="card slide-up">
+            <img src="{{ url_for('static', filename='img/camping.jpg') }}" alt="Camping">
+            <h3>Camping Sites</h3>
+            <p>Eco-friendly camping grounds.</p>
+        </div>
+
+        <div class="card slide-up">
+            <img src="{{ url_for('static', filename='img/fishing.jpg') }}" alt="Fishing">
+            <h3>Fishing Dams</h3>
+            <p>Enjoy recreational fishing experiences.</p>
+        </div>
+
+        <div class="card slide-up">
+            <img src="{{ url_for('static', filename='img/spring_water.jpg') }}" alt="Spring Water">
+            <h3>Spring Water Sites</h3>
+            <p>Natural springs for scenic enjoyment.</p>
+        </div>
+
+        <div class="card slide-up">
+            <img src="{{ url_for('static', filename='img/picnic.jpg') }}" alt="Picnic Parks">
+            <h3>Picnic Parks</h3>
+            <p>Relax at family-friendly picnic areas.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Visitor Services -->
+<section class="visitor-services fade-in">
+    <h2 class="section-title">Visitor Services</h2>
+
+    <div class="visitor-box">
+        <ul>
+            <li>Online Bookings & Reservations</li>
+            <li>Guided Game Drives</li>
+            <li>Educational Eco-Tour Programs</li>
+            <li>Event Hosting – Cultural events, team-building, private gatherings</li>
+        </ul>
+    </div>
+</section>
+
+{% endblock %}
