@@ -13,13 +13,13 @@
         <a href="{{ url_for('index') }}" class="logo">GameLodge</a>
 
         <!-- Hamburger Menu for Mobile -->
-        <div class="hamburger">
+        <div class="hamburger" id="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </div>
 
-        <nav>
+        <nav id="nav-menu">
             <a href="{{ url_for('about') }}">About</a>
             <a href="{{ url_for('gallery') }}">Gallery</a>
             <a href="{{ url_for('map_page') }}">Map</a>
@@ -27,7 +27,7 @@
 
             <!-- Services Dropdown -->
             <div class="dropdown">
-                <a href="#">Services ▼</a>
+                <a href="#" class="dropbtn">Services ▼</a>
                 <div class="dropdown-content">
                     <a href="{{ url_for('book_hunt') }}">Book Hunt</a>
                     <a href="{{ url_for('water') }}">Purified Water</a>
@@ -59,11 +59,31 @@
 
 <!-- JavaScript for Hamburger Menu -->
 <script>
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('nav');
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
 
+// Toggle mobile menu
 hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('mobile-active');
+});
+
+// Optional: Dropdown toggle for mobile
+const dropdowns = document.querySelectorAll('.dropdown');
+dropdowns.forEach(drop => {
+    const btn = drop.querySelector('.dropbtn');
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        drop.querySelector('.dropdown-content').classList.toggle('show');
+    });
+});
+
+// Close dropdown if clicked outside
+window.addEventListener('click', (e) => {
+    dropdowns.forEach(drop => {
+        if (!drop.contains(e.target)) {
+            drop.querySelector('.dropdown-content').classList.remove('show');
+        }
+    });
 });
 </script>
 

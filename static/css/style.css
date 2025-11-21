@@ -85,6 +85,7 @@ section {
     border-radius: 2px;
 }
 
+/* Desktop nav */
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -102,11 +103,6 @@ nav a {
 
 nav a:hover {
     background-color: rgba(255,255,255,0.15);
-}
-
-/* Mobile nav hidden by default */
-nav.mobile-hidden {
-    display: none;
 }
 
 /* ==========================
@@ -218,15 +214,17 @@ footer {
    RESPONSIVE
 ========================== */
 
-/* Tablets */
+/* Tablets / Mobile menu */
 @media (max-width: 900px) {
     .hero-text h1 { font-size: 32px; }
     .hero-text p { font-size: 16px; }
     .about-grid { grid-template-columns: 1fr; }
     .cards, .card-grid, .gallery { grid-template-columns: 1fr 1fr; }
 
-    /* Show hamburger menu */
+    /* Show hamburger */
     .hamburger { display: flex; }
+
+    /* Hide menu by default on tablet/mobile */
     nav { display: none; flex-direction: column; width: 100%; }
     nav.mobile-active { display: flex; }
 }
