@@ -9,9 +9,7 @@ body {
     scroll-behavior: smooth;
 }
 
-/* ==========================
-   GLOBAL IMAGE FADE-IN
-========================== */
+/* Global Image Fade-In */
 img {
     opacity: 0;
     transform: translateY(12px);
@@ -19,14 +17,8 @@ img {
 }
 
 @keyframes fadeInImg {
-    0% {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 /* Section Titles */
@@ -38,7 +30,6 @@ section h2 {
     letter-spacing: 1px;
 }
 
-/* Section Spacing */
 section {
     padding: 60px 0;
 }
@@ -68,38 +59,34 @@ section {
     font-weight: bold;
     color: #fff;
     text-decoration: none;
-    letter-spacing: 1px;
 }
 
+/* Nav links */
 nav {
     display: flex;
     align-items: center;
+    gap: 20px;
 }
 
 nav a {
-    margin-left: 20px;
     color: #e8e8e8;
     text-decoration: none;
     padding: 10px 14px;
     border-radius: 6px;
     transition: 0.3s ease;
+    font-size: 18px;
 }
 
 nav a:hover {
-    color: #fff;
     background-color: rgba(255,255,255,0.15);
     transform: translateY(-2px);
 }
 
 /* ==========================
-   DROPDOWN MENU
+   DROPDOWN
 ========================== */
 .dropdown {
     position: relative;
-}
-
-.dropdown a {
-    cursor: pointer;
 }
 
 .dropdown-content {
@@ -108,17 +95,15 @@ nav a:hover {
     background-color: #3a5a34;
     min-width: 180px;
     border-radius: 8px;
-    z-index: 100;
-    margin-top: 10px;
+    z-index: 200;
     flex-direction: column;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    margin-top: 10px;
 }
 
 .dropdown-content a {
-    color: #fff;
     padding: 12px 15px;
+    color: #fff;
     display: block;
-    transition: 0.2s;
 }
 
 .dropdown-content a:hover {
@@ -130,7 +115,7 @@ nav a:hover {
 }
 
 /* ==========================
-   HERO - PARALLAX
+   HERO
 ========================== */
 .hero-banner {
     height: 85vh;
@@ -138,52 +123,34 @@ nav a:hover {
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
-    position: relative;
     display: flex;
     align-items: center;
     padding-left: 60px;
+    position: relative;
     color: white;
     animation: fadeIn 1.6s ease-in-out;
 }
 
-/* Smooth fade-in animation */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.hero-banner .hero-overlay {
+.hero-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.45);
-    z-index: 1;
 }
 
-.hero-banner .hero-text {
+.hero-text {
     position: relative;
     z-index: 2;
     max-width: 500px;
     animation: slideUpHero 1.3s ease;
 }
 
-@keyframes slideUpHero {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.hero-banner .hero-text h1 {
+.hero-text h1 {
     font-size: 60px;
-    margin: 0;
-    color: #fff;
 }
 
-.hero-banner .hero-text p {
+.hero-text p {
     font-size: 22px;
-    margin-top: 10px;
-    color: #f0f0f0;
 }
 
 /* Button */
@@ -192,22 +159,16 @@ nav a:hover {
     padding: 12px 28px;
     background: #4b6f44;
     color: white;
-    text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
     margin-top: 20px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #35532f;
-    transform: translateY(-3px);
 }
 
 /* ==========================
-   CARDS (Services)
+   CARDS
 ========================== */
-.cards, .card-grid {
+.cards,
+.card-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 18px;
@@ -220,18 +181,8 @@ nav a:hover {
     padding: 20px;
     border-radius: 14px;
     text-align: center;
-    font-size: 18px;
-    cursor: pointer;
-    color: inherit;
-    text-decoration: none;
-    transition: 0.35s;
+    transition: 0.3s;
     box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-    border: 1px solid #eee;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 
 .card img {
@@ -243,49 +194,6 @@ nav a:hover {
 }
 
 /* ==========================
-   FEATURE IMAGE
-========================== */
-.feature-image img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    margin-top: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-}
-
-/* ==========================
-   VISITOR BOX
-========================== */
-.visitor-box {
-    width: 80%;
-    margin: auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-    border-left: 6px solid #4b6f44;
-}
-
-.visitor-box ul li {
-    padding: 10px 0;
-    font-size: 20px;
-}
-
-/* ==========================
-   FOOTER
-========================== */
-footer {
-    background: #2f4f2f;
-    padding: 25px;
-    text-align: center;
-    color: white;
-    margin-top: 40px;
-    font-size: 16px;
-    letter-spacing: 1px;
-}
-
-/* ==========================
    ABOUT PAGE
 ========================== */
 .about-hero {
@@ -294,35 +202,6 @@ footer {
     background-size: cover;
     background-position: center;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 1.5s ease;
-}
-
-.about-hero-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(30,50,30,0.55);
-}
-
-.about-hero-text {
-    position: relative;
-    color: white;
-    text-align: center;
-    z-index: 2;
-    animation: slideUpHero 1.3s ease;
-}
-
-.about-hero-text h1 {
-    font-size: 56px;
-    margin-bottom: 10px;
-}
-
-.about-hero-text p {
-    font-size: 22px;
-    opacity: 0.9;
 }
 
 .about-grid {
@@ -331,104 +210,91 @@ footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
-    align-items: center;
-}
-
-.about-grid.reverse {
-    grid-template-columns: repeat(2, 1fr);
-    direction: rtl;
-}
-
-.about-grid.reverse .about-text {
-    direction: ltr;
-}
-
-.about-text h2 {
-    font-size: 32px;
-    color: #2f4f2f;
-    margin-bottom: 15px;
-}
-
-.about-text ul {
-    padding-left: 20px;
-}
-
-.about-text ul li {
-    font-size: 18px;
-    margin: 8px 0;
 }
 
 .about-image img {
     width: 100%;
     border-radius: 14px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-}
-
-/* Feature image */
-.feature-image img {
-    width: 92%;
-    height: 380px;
-    object-fit: cover;
-    border-radius: 14px;
-    display: block;
-    margin: 50px auto;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-}
-
-/* Visitor box text */
-.visitor-box h2 {
-    font-size: 30px;
-    color: #2f4f2f;
-}
-
-.visitor-box ul li {
-    font-size: 20px;
-    padding: 8px 0;
 }
 
 /* ==========================
-   RESPONSIVE
+   RESPONSIVE STYLES
 ========================== */
+
+/* ===== LARGE TABLETS / SMALL LAPTOPS ===== */
+@media (max-width: 1100px) {
+    nav a { font-size: 16px; }
+    .hero-text h1 { font-size: 48px; }
+}
+
+/* ===== TABLETS ===== */
 @media (max-width: 900px) {
-    .cards, .card-grid {
+    /* Navbar becomes centered */
+    .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .cards,
+    .card-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    .hero-banner .hero-text h1 {
-        font-size: 40px;
-    }
-    .about-hero-text h1 {
-        font-size: 42px;
-    }
+
     .about-grid {
         grid-template-columns: 1fr;
     }
-    .feature-image img {
-        height: 260px;
+
+    .hero-banner {
+        padding-left: 0;
+        text-align: center;
+        background-attachment: scroll;
+        justify-content: center;
     }
+
+    .hero-text h1 { font-size: 42px; }
+    .hero-text p { font-size: 18px; }
 }
 
+/* ===== MOBILE PHONES ===== */
 @media (max-width: 600px) {
-    .cards, .card-grid {
+    .navbar { padding: 10px 0; }
+
+    .logo { font-size: 22px; }
+
+    nav a { 
+        font-size: 15px;
+        padding: 8px 10px;
+    }
+
+    .hero-banner {
+        height: 70vh;
+        padding: 20px;
+    }
+
+    .hero-text h1 { font-size: 32px; }
+    .hero-text p { font-size: 16px; }
+
+    .cards,
+    .card-grid {
         grid-template-columns: 1fr;
     }
-    .hero-banner {
-        background-attachment: scroll;
-        padding-left: 20px;
-        text-align: center;
-    }
-    .hero-banner .hero-text {
-        max-width: 100%;
-    }
-    .hero-banner .hero-text h1 {
-        font-size: 30px;
-    }
-    .about-hero-text h1 {
-        font-size: 32px;
-    }
-    .about-hero-text p {
-        font-size: 16px;
-    }
-    .visitor-box ul li {
-        font-size: 18px;
-    }
+
+    .card img { height: 160px; }
+
+    .about-hero-text h1 { font-size: 32px; }
+    .about-hero-text p { font-size: 16px; }
+}
+
+/* ===== SMALL MOBILE (extra safe) ===== */
+@media (max-width: 400px) {
+    .hero-text h1 { font-size: 28px; }
+    .logo { font-size: 20px; }
+    nav { gap: 6px; }
+    nav a { font-size: 14px; }
 }
